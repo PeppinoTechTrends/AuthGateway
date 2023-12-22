@@ -1,0 +1,146 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style-mobile-sign-up.css" media="screen and (max-width: 750px)">
+    <link rel="stylesheet" href="/static/assets/css/style-sign-up.css" media="screen and (min-width: 751px)">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</head>
+    <link rel="icon" type="image/png" href="/static/assets/img/mcdonalds-favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <title>MCDonald's - Pagina di registrazione</title>
+</head>
+<body>
+
+    <div class="All-Content">
+
+        <div class="header-side-login-content">
+            <img src="/static/assets/img/header-maionese.png" alt="Header Image">
+        </div>
+
+        <div class="left-side-login-content">
+            <a href="index.html" id="mc_logo_link" target="_blank"><img id="mc_logo_img" src="/static/assets/img/mc-donalds-logo..png" alt=""></a>
+            <a href="https://www.mcdonalds.it/prodotti/menu" id="menu_link" target="_blank"><img id="menu_img" src="/static/assets/img/menu.png" alt=""></a>
+            <img id="icecream_img" src="/static/assets/img/icecream.png" alt="">
+            <img id="cola_img" src="/static/assets/img/cola.png" alt="">
+            <h1 class="principal-text" style="padding-left: 3px; position: relative; bottom: 4vw;">Benvenuto nel mondo del sapore autentico. <br> Preparati a vivere un'esperienza unica e gustosa!</h1>
+            <h2 class="link-text" style="position: relative; bottom: 4%;"><a href="https://www.mcdonalds.it/prodotti/menu" target="_blank">Consulta i nostri ricchi menu'</a></h2>
+        </div>
+
+        <div class="right-side-login-content">
+            <img id="happy_meal" src="/static/assets/img/happy_.png" alt="">
+            <h1 id="accesso_utente" class="principal-text">Registra UTENTE</h1>
+
+            <div class="login-content">
+                <img id="milkshake" src="/static/assets/img/milkshake.png" alt="">
+                <img id="nuggets" src="/static/assets/img/nuggets.png" alt="">
+                <form th:action="@{/sign_up}"  th:object="${registrationForm}" method="post">
+                    <label for="unamtype="submit"ze"><b>Nome Utente</b></label><br>
+                    <input type="text" placeholder="Crea un nome utente" name="uname" maxlength="15" minlength="6" required><br>
+
+                    <label for="email"><b>Email</b></label><br>
+                    <input type="email" placeholder="Inserisci il tuo indirizzo email" name="email" maxlength="65" required><br>
+
+                    <label for="psw"><b>Chiave di Accesso</b></label><br>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Crea una chiave di accesso" name="psw" maxlength="15" minlength="6" required>
+                        <span class="password-toggle" id="togglePassword"></span>
+                            <i id="hamburger_pass" title="Mostra la chiave di accesso!" class="fa-solid fa-burger" onmousedown="togglePasswordVisibility(true)" onmouseup="togglePasswordVisibility(false)" onmouseleave="togglePasswordVisibility(false)" ></i>
+                        </span>
+                    </div><br>
+
+                    <button style="position: relative; bottom: 3vw;" type="submit">Registrati</button>
+                    <p style="text-align: center; margin-top: -2vw; font-size: calc(0.7em + 0.3vw);">Sei gia' registrato? <a id="sign_in" style="color: red;" href="sign_ins">Accedi qui</a></p>
+                </form>
+            </div>
+
+
+        </div>
+
+        <div class="footer-side-login-content">
+            <img src="/static/assets/img/header-ketchup.png" alt="Header Image">
+        </div>
+    </div>
+
+
+    <script>
+        function correctRegister() {
+            Swal.fire({
+                    title: 'Registrazione completata!',
+                    text: 'Ora puoi accedere con le tue credenziali.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "sign_in.html"; // Reindirizza alla pagina di accesso
+                    }
+                });
+
+        }
+
+        function cantRegisterAlready () {
+            Swal.fire({
+                    title: 'Errore!',
+                    text: 'Questo utente è già registrato. Prova a utilizzare un altro nome utente o email.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+        }
+
+        // Se il server è irraggiungibile (devi aggiungerlo tu al registerHandle)
+        function cantRegisterServer() {
+            Swal.fire({
+                title: 'Registrazione Negata',
+                text: 'Si è verificato un errore durante la registrazione. Riprova piu tardi!',
+                icon: 'error', // Cambia l'icona a seconda delle tue esigenze
+                confirmButtonText: 'OK',
+                allowOutsideClick: false // L'utente non può chiudere l'avviso cliccando al di fuori di esso
+            });
+        }
+
+        let isHamburgerClicked = false;
+
+        function togglePasswordVisibility(mouseDown) {
+            const passwordInput = document.getElementById("password");
+            const hamburgerIcon = document.getElementById("hamburger_pass");
+
+            if (mouseDown) {
+                isHamburgerClicked = true;
+                passwordInput.type = "text";
+                hamburgerIcon.style.opacity = 0.5;
+            } else {
+                isHamburgerClicked = false;
+                passwordInput.type = "password";
+                hamburgerIcon.style.opacity = 1;
+            }
+        }
+
+        function handleRegistration() {
+            // Simula l'invio dei dati al backend (qui si dovrebbe fare una vera richiesta HTTP al server)
+            const uname = document.getElementsByName("uname")[0].value;
+            const email = document.getElementsByName("email")[0].value;
+            const password = document.getElementsByName("psw")[0].value;
+
+            // Supponiamo che il backend restituisca true se l'utente non esiste nel sistema
+            const userDoesNotExist = true; // Simulazione della risposta dal backend
+
+            if (userDoesNotExist) {
+                correctRegister();
+            }
+
+            // Se l'utente esiste gia
+            else {
+                cantRegisterAlready();
+            }
+        }
+
+    </script>
+
+
+</body>
+
+
+</html>

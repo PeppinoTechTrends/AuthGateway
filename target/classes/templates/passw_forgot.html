@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/assets/css/style-mobile-sign-up.css" media="screen and (max-width: 750px)">
+    <link rel="stylesheet" href="/static/assets/css/style-sign-up.css" media="screen and (min-width: 751px)">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+</head>
+    <link rel="icon" type="image/png" href="/static/assets/img/mcdonalds-favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <title>MCDonald's - Recupero Password</title>
+</head>
+<body>
+
+    <div class="All-Content">
+
+        <div class="header-side-login-content">
+            <img src="/static/assets/img/header-maionese.png" alt="Header Image">
+        </div>
+
+        <div class="left-side-login-content">
+            <a href="index.html" id="mc_logo_link" target="_blank"><img id="mc_logo_img" src="/static/assets/img/mc-donalds-logo..png" alt=""></a>
+            <a href="https://www.mcdonalds.it/prodotti/menu" id="menu_link" target="_blank"><img id="menu_img" src="/static/assets/img/menu.png" alt=""></a>
+            <img id="icecream_img" src="/static/assets/img/icecream.png" alt="">
+            <img id="cola_img" src="/static/assets/img/cola.png" alt="">
+            <h1 class="principal-text" style="padding-left: 3px; position: relative; bottom: 4vw;">Benvenuto nel mondo del sapore autentico. <br> Preparati a vivere un'esperienza unica e gustosa!</h1>
+            <h2 class="link-text" style="position: relative; bottom: 4%;"><a href="https://www.mcdonalds.it/prodotti/menu" target="_blank">Consulta i nostri ricchi menu'</a></h2>
+        </div>
+
+        <div class="right-side-login-content">
+            <img id="happy_meal" src="/static/assets/img/happy_.png" alt="">
+            <h1 id="accesso_utente" class="principal-text">Reset Password</h1>
+            
+            <div class="login-content">
+                <form action="" method="post">
+
+                    
+
+                    <label style="position: relative; top: 3vw;" for="uname"><b>Indirizzo Email</b></label><br>
+                    <input style="position: relative; top: 3vw;" type="email" placeholder="email usata in fase di registrazione" name="uname" maxlength="65"><br>
+                    <button style="position: relative; top: 2vw;" type="submit" onclick="sendForm(event);">Invia</button>
+                    <p style="text-align: center; position: relative; top: 4vw; font-size: calc(0.7rem + 0.4vw);">Inserisci l'indirizzo email associato al tuo account. Ti invieremo un'email con un link per reimpostare la tua password.</p>
+                </form>
+            </div>
+            
+
+        </div>
+
+        <div class="footer-side-login-content">
+            <img src="/static/assets/img/header-ketchup.png" alt="Header Image">
+        </div>
+    </div>
+
+
+    <script>
+        event.preventDefault(); // Previeni l'invio del modulo predefinito
+
+        let isHamburgerClicked = false;
+            
+        function togglePasswordVisibility(mouseDown) {
+            const passwordInput = document.getElementById("password");
+            const hamburgerIcon = document.getElementById("hamburger_pass");
+                
+            if (mouseDown) {
+                isHamburgerClicked = true;
+                passwordInput.type = "text";
+                hamburgerIcon.style.opacity = 0.5;
+            } else {
+                isHamburgerClicked = false;
+                passwordInput.type = "password";
+                hamburgerIcon.style.opacity = 1;
+            }
+        }
+
+        function sendForm(event) {
+        event.preventDefault(); // Previeni l'invio del modulo predefinito
+
+        // Utilizza SweetAlert2 per mostrare un avviso personalizzato
+        Swal.fire({
+            title: 'Fatto!!',
+            text: 'Se l\'email è corretta, ti verrà inviato un messaggio per reimpostare la password. Verrai ora reindirizzato al portale principale.',
+            icon: 'success', // Cambia l'icona a seconda delle tue esigenze
+            confirmButtonText: 'OK',
+            allowOutsideClick: false // L'utente non può chiudere l'avviso cliccando al di fuori di esso
+        }).then((result) => {
+            // Dopo che l'utente ha cliccato su "OK", reindirizza alla pagina principale solo se ha premuto "OK"
+            if (result.isConfirmed) {
+                    window.location.href = "sign_in.html";}
+        });
+    }
+
+</script>
+
+    
+}
+
+    </script>
+
+     
+</body>
+
+
+</html>

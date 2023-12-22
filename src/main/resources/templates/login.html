@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f6f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .login-container {
+            max-width: 400px;
+            padding: 50px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .login-container:hover {
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px 15px;
+            box-sizing: border-box;
+            border: 2px solid #eaeaea;
+            border-radius: 5px;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        button, .google-login-button {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #007BFF;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .google-login-button {
+            background-color: #D54B3D;
+        }
+
+        .google-login-button:hover {
+            background-color: #B1392E;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .error-message, .logout-message {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #d9534f;
+        }
+
+        .logout-message {
+            color: #5cb85c;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <form method="post" th:action="@{/login}">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input id="username" name="username" required type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" name="password" required type="password"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Login</button>
+        </div>
+        <div class="form-group">
+            <span class="error-message" th:if="${invalidToken}">Token o username non validi.</span>
+            <span class="logout-message" th:if="${emailConfirmed}">Email confermata con successo.</span>
+            <span class="error-message" th:if="${param.error}">Username o password non validi.</span>
+            <span class="logout-message" th:if="${param.logout}">Sei stato disconnesso.</span>
+        </div>
+
+        <div th:if="${loginError}" class="form-group">
+            <label style="color: red;">Credenziali non corrette</label>
+        </div>
+        <!-- Link per creare un account -->
+        <div class="form-group">
+            <a href="/register">Crea un account</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
