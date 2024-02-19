@@ -17,10 +17,7 @@ public class LoginController {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-
-
-
+    
     @GetMapping
     public String loginForm(@RequestParam(value = "loginError", required = false) String loginError,Model model) {
         if (loginError != null) {
