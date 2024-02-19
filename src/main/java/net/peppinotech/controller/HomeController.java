@@ -14,7 +14,6 @@ public class HomeController {
     }
 
     @GetMapping(value = "testAdmin")
-
     @PostAuthorize("hasRole('ADMIN')")
     public String homeAdmin() {
         return "admin";
