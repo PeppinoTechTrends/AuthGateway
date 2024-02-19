@@ -14,6 +14,7 @@ public class RegistrationService {
     @Autowired private UserRepository userRepository;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private TokenService tokenService;
+    
     public boolean successRegistration(RegistrationForm form, Model model){
         if (userRepository.findByUsername(form.getUsername()) != null) {
             model.addAttribute("usernameExists", true);
